@@ -13,6 +13,9 @@ A standard recommended "swag pack" to have a Nix booth at a conference:
 
 ## Suppliers
 
+#### EU
+- https://stickerit.co/en-us/pages/shipping
+
 ### US
 - https://www.stickermule.com/products/circle-stickers: $100 per 300
 - https://www.bestofsigns.com/vinyl-banners.html: $40 per 1
