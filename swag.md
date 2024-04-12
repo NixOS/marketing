@@ -13,7 +13,7 @@ A standard recommended "swag pack" to have a Nix booth at a conference:
 
 ## Suppliers
 
-#### EU
+### EU
 - https://stickerit.co/en-us/pages/shipping
 
 ### US
