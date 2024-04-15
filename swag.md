@@ -24,11 +24,12 @@ A standard recommended "swag pack" to have a Nix booth at a conference:
 - [Sticker Mule][stickermule] has been used by SCaLE, the EFF, and NixCon NA in the past for stickers and has previously sponsored SCaLE. It appears they also make labels, buttons, magnets, t-shirts, and more.
 - [Best of Signs][bestofsigns] makes a variety of items that would be useful for a convention booth including vinyl banners, retractable banners, feather flags, and table covers.
 - [U Printing][uprinting] makes vinyl banners, retractable banners, and stickers.
-- [Babylon Burning][babylonburning] has been used by the EFF in the past for their shirts.
+- [Babylon Burning][babylonburning] has been used by the EFF in the past for their shirts and hoodies; they also do totes and jerseys.
 - [KK Promotions][kkpromotions] has been used by the EFF in the past for hats. They appear to supply a ton of other merchandise like apparel, bags, drinkware, etc.
 - [Pinlord Shop][pinlordshop] makes custom enamel pins.
 - [Patch Phrase][patchphrase] makes custom embroidered patches.
 - [Patch 22][patch22] makes custom embroidered patches.
+- [Coinforce][coinforce] has been used by the EFF in the past for custom challenge coins. They also make patches and pins.
 
 #### T-shirts
 
@@ -102,3 +103,5 @@ A standard recommended "swag pack" to have a Nix booth at a conference:
 [patchphrase]: https://patchphrase.com/
 
 [patch22]: https://www.patch22.net/
+
+[coinforce]: https://www.coinforce.com/
