@@ -15,6 +15,12 @@ A standard recommended "swag pack" to have a Nix booth at a conference:
 
 [Pinlord Shop][pinlordshop-article] has a nice article about how to source enamel pins.
 
+## Services
+
+### US
+
+- [Freehive][freehive] is a graphic design group with an all FOSS stack. They have been used by GIMP and Pixls.us for tradeshow banner and pamphlet design and production.
+
 ## Suppliers
 
 ### US
@@ -105,3 +111,5 @@ A standard recommended "swag pack" to have a Nix booth at a conference:
 [patch22]: https://www.patch22.net/
 
 [coinforce]: https://www.coinforce.com/
+
+[freehive]: https://freehive.com/
