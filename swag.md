@@ -23,6 +23,9 @@ A standard recommended "swag pack" to have a Nix booth at a conference:
 
 ## Suppliers
 
+### EU
+- https://stickerit.co/en-us/pages/shipping
+
 ### US
 
 #### Supplier list
