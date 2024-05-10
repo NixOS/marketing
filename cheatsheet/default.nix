@@ -39,8 +39,8 @@ pkgs.stdenvNoCC.mkDerivation {
     root = ./.;
     fileset = lib.fileset.unions [
       ./main.tex
-      ./a4paper.tex
-      ./colors-default.tex
+      ./paper-a4.tex
+      ./color-default.tex
       ./nixos.svg
       ./background.svg
     ];
