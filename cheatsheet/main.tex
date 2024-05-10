@@ -1,9 +1,8 @@
 \documentclass[landscape, 10pt]{article}
-\usepackage[a4paper, left=1cm, right=1cm, bottom=0.2cm, top=0.2cm]{geometry}
+\input{a4paper.tex}
+\input{colors-default.tex}
 \usepackage{multicol}
 \usepackage[most]{tcolorbox}
-\usepackage{xcolor}
-\usepackage{minted}
 \usepackage{svg}
 
 \usepackage[hidelinks]{hyperref}
@@ -14,10 +13,6 @@
 
 % Set typewriter font everywhere
 \renewcommand{\familydefault}{\ttdefault}
-
-% Define colors
-\definecolor{nixdarkblue}{HTML}{5277C3}
-\definecolor{codelight}{HTML}{f8f8f8}
 
 % Declare Unicode characters
 \DeclareUnicodeCharacter{21D2}{$\Rightarrow$}
