@@ -1,14 +1,10 @@
 \documentclass[landscape, 10pt]{article}
 \usepackage[a4paper, left=1cm, right=1cm, bottom=0.2cm, top=0.2cm]{geometry}
-% \usepackage{noto}
 \usepackage{multicol}
-% \usepackage{graphicx} % Required for inserting images
 \usepackage[most]{tcolorbox}
 \usepackage{xcolor}
 \usepackage{minted}
-% \usepackage{arydshln}
 \usepackage{svg}
-% \usepackage{adjustbox}
 
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
@@ -19,11 +15,11 @@
 % Set typewriter font everywhere
 \renewcommand{\familydefault}{\ttdefault}
 
-\definecolor{nixlightblue}{HTML}{7EBAE4}
+% Define colors
 \definecolor{nixdarkblue}{HTML}{5277C3}
-% \definecolor{codedark}{HTML}{3a3a3a}
 \definecolor{codelight}{HTML}{f8f8f8}
 
+% Declare Unicode characters
 \DeclareUnicodeCharacter{21D2}{$\Rightarrow$}
 
 % Get rid of red boxes around minted "errors"
@@ -31,6 +27,7 @@
     \renewcommand{\fcolorbox}[4][]{#4}%
 }
 
+% Create the box that is used everywhere
 \newtcolorbox{ctexpression}[2][]{
     enhanced, 
     breakable,
@@ -77,6 +74,7 @@
 
 \renewcommand{\arraystretch}{1.5}
 
+% Set the background image
 \AddToHook{shipout/background}{%
     \put (0in,-0.9\paperheight){\scalebox{-1}[1]{\includesvg[width=\paperwidth,height=\paperheight]{background.svg}}}%
 }
