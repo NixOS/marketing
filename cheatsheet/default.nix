@@ -26,48 +26,63 @@ let
   };
 
   inherit (pkgs) lib;
-in
-pkgs.stdenvNoCC.mkDerivation {
-  name = "nixos-cheat-sheet";
-  phases = [
-    "unpackPhase" # just for fetching the src
-    "buildPhase"
-    "installPhase"
-  ];
 
-  src = lib.fileset.toSource {
-    root = ./.;
-    fileset = lib.fileset.unions [
-      ./main.tex
-      ./paper-a4.tex
-      ./color-default.tex
-      ./nixos.svg
-      ./background.svg
+  combinations = lib.cartesianProduct {
+    paper = [
+      "a4"
+      "letter"
+    ];
+    color = [
+      "default"
+      "bw"
     ];
   };
+in
+lib.listToAttrs (
+  builtins.map (elem: {
+    name = "cheat-sheet-${elem.paper}-${elem.color}";
 
-  buildInputs = [
-    tex
-    pkgs.inkscape # for svg images
-    pkgs.python3Packages.pygments # for minted code blocks
-  ];
+    value = pkgs.stdenvNoCC.mkDerivation {
+      name = "nixos-cheat-sheet";
 
-  # HOME needs to be set to keep inkscape/Fontconfig from complaining
-  buildPhase = ''
-    DIR=$(mktemp -d)
-    env TEXMFHOME="$DIR/.cache" \
-    TEXMFVAR="$DIR/.cache/texmf-var" \
-    HOME="$DIR/home" \
-    latexmk \
-      -interaction=nonstopmode \
-      -pdf -pdflatex \
-      -output-directory="." \
-      -shell-escape \
-      main.tex
-  '';
+      src = lib.fileset.toSource {
+        root = ./.;
+        fileset = lib.fileset.unions [
+          ./main.tex
+          ./paper-${elem.paper}.tex
+          ./color-${elem.color}.tex
+          ./nixos.svg
+          ./background.svg
+        ];
+      };
 
-  installPhase = ''
-    mkdir $out
-    cp main.pdf $out/cheatsheet.pdf
-  '';
-}
+      buildInputs = [
+        tex
+        pkgs.inkscape # for svg images
+        pkgs.python3Packages.pygments # for minted code blocks
+      ];
+
+      # HOME needs to be set to keep inkscape/Fontconfig from complaining
+      buildPhase = ''
+        mv paper-${elem.paper}.tex paper.tex
+        mv color-${elem.color}.tex color.tex
+
+        DIR=$(mktemp -d)
+        env TEXMFHOME="$DIR/.cache" \
+        TEXMFVAR="$DIR/.cache/texmf-var" \
+        HOME="$DIR/home" \
+        latexmk \
+          -interaction=nonstopmode \
+          -pdf -pdflatex \
+          -output-directory="." \
+          -shell-escape \
+          main.tex
+      '';
+
+      installPhase = ''
+        mkdir $out
+        cp main.pdf $out/cheat-sheet-${elem.paper}-${elem.color}.pdf
+      '';
+    };
+  }) combinations
+)

@@ -16,11 +16,10 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        cheatsheets = pkgs.callPackage ./cheatsheet { };
       in
       {
-        packages = {
-          cheatsheet = pkgs.callPackage ./cheatsheet { };
-        };
+        packages = { } // cheatsheets;
       }
     );
 }
