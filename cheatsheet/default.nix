@@ -41,10 +41,12 @@ pkgs.stdenvNoCC.mkDerivation {
     pkgs.python3Packages.pygments # for minted code blocks
   ];
 
+  # HOME needs to be set to keep inkscape/Fontconfig from complaining
   buildPhase = ''
     DIR=$(mktemp -d)
     env TEXMFHOME="$DIR/.cache" \
     TEXMFVAR="$DIR/.cache/texmf-var" \
+    HOME="$DIR/home" \
     latexmk \
       -interaction=nonstopmode \
       -pdf -pdflatex \
