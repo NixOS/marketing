@@ -16,7 +16,10 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        cheatsheets = pkgs.callPackage ./cheatsheet { };
+        cheatsheets = builtins.removeAttrs (pkgs.callPackage ./cheatsheet { }) [
+          "override"
+          "overrideDerivation"
+        ];
       in
       {
         packages = { } // cheatsheets;
