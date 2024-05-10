@@ -24,6 +24,8 @@ let
       xcolor
       ;
   };
+
+  inherit (pkgs) lib;
 in
 pkgs.stdenvNoCC.mkDerivation {
   name = "nixos-cheat-sheet";
@@ -33,7 +35,14 @@ pkgs.stdenvNoCC.mkDerivation {
     "installPhase"
   ];
 
-  src = ./.;
+  src = lib.fileset.toSource {
+    root = ./.;
+    fileset = lib.fileset.unions [
+      ./main.tex
+      ./nixos.svg
+      ./background.svg
+    ];
+  };
 
   buildInputs = [
     tex
