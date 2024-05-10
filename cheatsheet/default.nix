@@ -25,6 +25,13 @@ let
       ;
   };
 
+  pygments = pkgs.python3Packages.pygments.overridePythonAttrs (old: {
+    patches = (old.patches or [ ]) ++ [
+      # removed bold and italics formatting for comments and strings
+      ./unformatted-comments-strings.patch
+    ];
+  });
+
   inherit (pkgs) lib;
 
   combinations = lib.cartesianProduct {
@@ -59,7 +66,7 @@ lib.listToAttrs (
       buildInputs = [
         tex
         pkgs.inkscape # for svg images
-        pkgs.python3Packages.pygments # for minted code blocks
+        pygments # for minted code blocks
       ];
 
       # HOME needs to be set to keep inkscape/Fontconfig from complaining

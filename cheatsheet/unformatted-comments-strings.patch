@@ -1,0 +1,25 @@
+diff --git a/pygments/styles/bw.py b/pygments/styles/bw.py
+index aadcf5df..eb0856c3 100644
+--- a/pygments/styles/bw.py
++++ b/pygments/styles/bw.py
+@@ -22,9 +22,6 @@ class BlackWhiteStyle(Style):
+     background_color = "#ffffff"
+ 
+     styles = {
+-        Comment:                   "italic",
+-        Comment.Preproc:           "noitalic",
+-
+         Keyword:                   "bold",
+         Keyword.Pseudo:            "nobold",
+         Keyword.Type:              "nobold",
+@@ -37,10 +34,6 @@ class BlackWhiteStyle(Style):
+         Name.Entity:               "bold",
+         Name.Tag:                  "bold",
+ 
+-        String:                    "italic",
+-        String.Interpol:           "bold",
+-        String.Escape:             "bold",
+-
+         Generic.Heading:           "bold",
+         Generic.Subheading:        "bold",
+         Generic.Emph:              "italic",
