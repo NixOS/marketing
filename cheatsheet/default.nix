@@ -41,7 +41,7 @@ let
     ];
     color = [
       "default"
-      "bw"
+      "print"
     ];
   };
 in
