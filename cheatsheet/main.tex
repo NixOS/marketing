@@ -192,9 +192,9 @@ let x = { y = 1; }; in { y = x.y; }
 {\color{nixdarkblue}Add all attributes into scope using} with
     \begin{minted}{nix}
 let
-  set = { x = 1; y = 2; };
+  s = { x = 1; y = 2; };
 in
-  with set;
+  with s;
   x + y # ⇒ returns 3
     \end{minted}
 \end{ctexpression}
@@ -222,9 +222,9 @@ else -1
 {\color{nixdarkblue}Check if an attribute exists using} ?
     \begin{minted}{nix}
 let
-  set = { x = 1; };
+  s = { x = 1; };
 in
-  set ? x # ⇒ returns true
+  s ? x # ⇒ returns true
     \end{minted}
     \tcbline
 {\color{nixdarkblue}Reference attribute keys using} .
@@ -238,9 +238,9 @@ in
 {\color{nixdarkblue}Reference optional attribute keys using} or
     \begin{minted}{nix}
 let
-  set = { x = 1; };
+  s = { x = 1; };
 in
-  set.y or 2 # ⇒ returns 2
+  s.y or 2 # ⇒ returns 2
     \end{minted}
 \end{ctexpression}
 
