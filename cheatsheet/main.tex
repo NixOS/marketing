@@ -1,0 +1,346 @@
+\documentclass[landscape, 10pt]{article}
+\input{paper.tex}
+\input{color.tex}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{svg}
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=nixdarkblue,
+}
+
+% Set typewriter font everywhere
+\usepackage[T1]{fontenc}
+\renewcommand{\familydefault}{\ttdefault}
+
+% Declare Unicode characters
+\DeclareUnicodeCharacter{21D2}{$\Rightarrow$}
+
+% Get rid of red boxes around minted "errors"
+\AtBeginEnvironment{minted}{%
+    \renewcommand{\fcolorbox}[4][]{#4}%
+}
+
+% Create the box that is used everywhere
+\newtcolorbox{ctexpression}[2][]{
+    enhanced, 
+    breakable,
+    colback=codelight,
+    colframe=nixdarkblue,
+    before skip=1mm, after skip=1mm,left=1mm, right=1mm, top=1mm, bottom=1mm,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight}, 
+    boxed title size=title,
+    boxed title style={%
+        sharp corners, 
+        rounded corners=northwest, 
+        colback=tcbcolframe, 
+        boxrule=0pt,
+    },
+    underlay boxed title={%
+        \path[fill=tcbcolframe]
+            (title.south west)--
+            (title.south east)
+            to [out=0, in=180] ([xshift=5mm]title.east)--
+            (title.center-|frame.east)
+            [rounded corners] |- (frame.north) -|
+            cycle;
+    },fonttitle=\bfseries, title={#2},#1
+}
+
+% Shrink the top and bottom separation around minted environments
+\newlength{\fancyvrbtopsep}
+\newlength{\fancyvrbpartopsep}
+\makeatletter
+\FV@AddToHook{\FV@ListParameterHook}{\topsep=\fancyvrbtopsep\partopsep=\fancyvrbpartopsep}
+\makeatother
+\setlength{\fancyvrbtopsep}{0pt}
+\setlength{\fancyvrbpartopsep}{0pt}
+
+\newenvironment{tightcenter}{%
+  \setlength\topsep{0pt}
+  \setlength\parskip{0pt}
+  \begin{center}
+}{%
+  \end{center}
+}
+
+\begin{document}
+
+\renewcommand{\arraystretch}{1.5}
+
+% Set the background image
+\AddToHook{shipout/background}{%
+    \put (0in,-0.9\paperheight){\scalebox{-1}[1]{\includesvg[width=\paperwidth,height=\paperheight]{background.svg}}}%
+}
+
+\begin{multicols*}{3}
+
+\begin{ctexpression}{Types \& Syntax}
+    \begin{tabular}{l p{0.5\textwidth}}
+    String &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+"this is a string"
+''
+  a multi-line string
+''
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        Boolean &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+true, false
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        Null &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+null
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        Integer &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+123, -123
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        Float &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+3.14, -3.14
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        Path &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+/an/absolute/path
+./a/relative/path
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        Attribute Set &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+{ a = 1; b = 2; }
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        List &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+[ 1 2.0 "thing" null ]
+            \end{minted}
+        \end{minipage}
+        \\
+        % \hdashline
+        Comment &
+        \begin{minipage}{0.5\textwidth}
+            \begin{minted}{nix}
+# A single line comment.
+/*
+  A multi-line comment.
+*/
+            \end{minted}
+        \end{minipage}
+    \end{tabular}
+\end{ctexpression}
+
+\vfill
+
+\begin{ctexpression}{Scoping}
+{\color{nixdarkblue}Define local variables using} let...in
+    \begin{minted}{nix}
+let
+  x = 1;
+  y = 2;
+in
+  x + y # ⇒ returns 3
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Add variables into scope using} inherit
+    \begin{minted}{nix}
+let x = 1; in { inherit x; }
+    \end{minted}
+{\color{nixdarkblue}desugars to}
+    \begin{minted}{nix}
+let x = 1; in { x = x; }
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Add attributes into scope using} inherit
+    \begin{minted}{nix}
+let x = { y = 1; }; in { inherit (x) y; }
+    \end{minted}
+{\color{nixdarkblue}desugars to}
+    \begin{minted}{nix}
+let x = { y = 1; }; in { y = x.y; }
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Add all attributes into scope using} with
+    \begin{minted}{nix}
+let
+  s = { x = 1; y = 2; };
+in
+  with s;
+  x + y # ⇒ returns 3
+    \end{minted}
+\end{ctexpression}
+
+\begin{ctexpression}{Conditionals}
+{\color{nixdarkblue}Define conditionals using} if...then...else
+    \begin{minted}{nix}
+if x > 0
+then 1
+else -1
+    \end{minted}
+\end{ctexpression}
+
+\vfill
+
+\begin{ctexpression}{Attribute Sets}
+{\color{nixdarkblue}Update attribute sets using} //
+    \begin{minted}{nix}
+{ x = 1; } // { y = 2; }
+# ⇒ returns { x = 1; y = 2;}
+{ x = 1; } // { x = 2; }
+# ⇒ returns { x = 2; }
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Check if an attribute exists using} ?
+    \begin{minted}{nix}
+let
+  s = { x = 1; };
+in
+  s ? x # ⇒ returns true
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Reference attribute keys using} .
+    \begin{minted}{nix}
+let
+  s = { x = { y = 1; }; };
+in
+  s.x.y # ⇒ returns 1
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Reference optional attribute keys using} or
+    \begin{minted}{nix}
+let
+  s = { x = 1; };
+in
+  s.y or 2 # ⇒ returns 2
+    \end{minted}
+\end{ctexpression}
+
+\vfill
+
+\begin{ctexpression}{Concatenation \& Interpolation}
+{\color{nixdarkblue}Concatenate lists using} ++
+    \begin{minted}{nix}
+[ 1 2 ] ++ [ 3 4 ] # ⇒ returns [ 1 2 3 4 ]
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Concatenate paths and strings use} +
+    \begin{minted}{nix}
+/bin + /sh # ⇒ returns /bin/sh
+/bin + "/sh" # ⇒ returns /bin/sh
+"/bin" + "/sh" # ⇒ returns "/bin/sh"
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Interpolate strings using} \$\string{\string}
+    \begin{minted}{nix}
+let
+  x = "bar";
+in
+  "foo ${x} baz" # ⇒ returns "foo bar baz"
+    \end{minted}
+\end{ctexpression}
+
+\begin{ctexpression}{Functions}
+{\color{nixdarkblue}Simple function}
+    \begin{minted}{nix}
+let
+  f = x: x + 1;
+in
+  f 1 # ⇒ returns 2
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Multiple arguments}
+    \begin{minted}{nix}
+let
+  f = x: y: [ x y ];
+in
+  f 1 2 # ⇒ returns [ 1 2 ]
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Named arguments with attribute sets}
+    \begin{minted}{nix}
+let
+  f = { x, y }: x + y;
+in
+  f { x=1; y=2; } # ⇒ returns 3
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Named arguments; ignores extras using} ...
+    \begin{minted}{nix}
+let
+  f = { x, y, ... }: x + y;
+in
+  f { x=1; y=2; z=3; } # ⇒ returns 3
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Named arguments; default values using} ?
+    \begin{minted}{nix}
+let
+  f = { x, y ? 2 }: x + y;
+in
+  f { x=1; } # ⇒ returns 3
+    \end{minted}
+    \tcbline
+{\color{nixdarkblue}Bind set arguments to a variable using} @
+    \begin{minted}{nix}
+let
+  f = { x, y }@args: args.x + args.y;
+in
+  f { x=1; y=2; } # ⇒ returns 3
+    \end{minted}
+\end{ctexpression}
+
+\vfill
+
+{\setlength\parindent{0pt}
+\includesvg[width=\columnwidth]{nixos.svg}
+
+\begin{tightcenter}
+{\large Official Nix Language Cheat Sheet}
+\end{tightcenter}
+
+\vfill
+
+Additional Resources:
+
+{\small
+\href{https://nixos.org/manual/nix/stable/language/builtins}{nixos.org/manual/nix/stable/language/builtins}
+
+\href{https://nixos.org/manual/nixpkgs/stable/\#id-1.4}{nixos.org/manual/nixpkgs/stable/\#id-1.4}
+}
+
+\vspace{0.2cm}
+}
+
+\end{multicols*}
+
+\end{document}
+
