@@ -18,6 +18,39 @@ As a member of the NixOS Marketing Team, our primary objectives include:
 
 The current members can be found on the [Marketing team page](https://nixos.org/community/teams/marketing) on the NixOS site.
 
+## Roles
+
+Team members in these roles are not responsible for doing all the work themselves; they are responsible for ensuring the work is completed effectively.
+Members taking on these roles should feel empowered to make decisions and coordinate resources as needed.
+
+### Lead
+
+- Define the team’s objectives and ensure alignment with the overall mission of NixOS.
+- Guide and motivate the team to meet these objectives.
+- Ensure team members have the resources, support, and information necessary to succeed.
+- Serve as the primary point of coordination with other teams, the Steering Committee (SC), and the NixOS Foundation Board.
+
+### Webmaster
+
+- Oversee the maintenance and upkeep of the NixOS homepage.
+- Select and manage the build tools used for the website.
+- Establish the overall design and visual identity of the website.
+- Develop and maintain a clear contribution guide for website contributors.
+- Implement and maintain continuous integration (CI) and pipeline tooling for the website.
+
+### Social Media Liaison
+
+- Manage the organization’s social media presence and external communications.
+- Create and schedule social media posts to promote events, updates, and community initiatives.
+- Manage accounts on platforms such as X (formerly Twitter), Mastodon, and LinkedIn (future consideration for platforms like Bluesky).
+- Oversee the creation and distribution of the NixOS blog and newsletter content.
+
+### Surveys and Metrics Coordinator
+
+- Organize and manage the yearly community survey and other periodic surveys.
+- Process survey results and share findings with the community via Discourse posts.
+- Collect, analyze, and maintain key metrics to evaluate the impact of marketing initiatives and community engagement.
+
 ## Meetings
 
 We meet regularly every other week.
