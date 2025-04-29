@@ -51,6 +51,14 @@ Members taking on these roles should feel empowered to make decisions and coordi
 - Process survey results and share findings with the community via Discourse posts.
 - Collect, analyze, and maintain key metrics to evaluate the impact of marketing initiatives and community engagement.
 
+### Brand and Design Steward
+
+- Maintain and evolve the NixOS visual identity, including logos, typography, colors, design guidelines, and official assets.
+- Ensure consistent use of the brand across websites, events, and communication channels.
+- Maintain a clear branding guide for contributors and partners.
+- Support the community with design feedback and guidance.
+- Collaborate on visuals for social media, blog posts, and other outreach efforts.
+
 ## Meetings
 
 We meet regularly every other week.
