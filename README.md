@@ -68,7 +68,7 @@ You can see our meeting times on [this calendar](https://calendar.google.com/cal
 
 - [Discourse](https://discourse.nixos.org/c/dev/marketing-team/28)
 - [Matrix](https://matrix.to/#/#marketing:nixos.org)
-- [Email](mailto:webmaster@nixos.org)
+- [Email](mailto:marketing@nixos.org)
 
 If you have a time sensitve marketing need, reach out on Matrix.
 
