@@ -30,7 +30,7 @@ Members taking on these roles should feel empowered to make decisions and coordi
 - Ensure team members have the resources, support, and information necessary to succeed.
 - Serve as the primary point of coordination with other teams, the Steering Committee (SC), and the NixOS Foundation Board.
 
-### Webmaster
+### Web Lead
 
 - Oversee the maintenance and upkeep of the NixOS homepage.
 - Select and manage the build tools used for the website.
